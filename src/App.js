@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React, { useState } from 'react';
+import LaptopForm from './Components/LaptopForm';
+import LaptopList from './Components/LaptopList';
+import ImportCSV from './Components/ImportCSV';
 
-function App() {
+const App = () => {
+  const [laptopsUpdated, setLaptopsUpdated] = useState(false);
+
+  const handleLaptopAdded = () => {
+    setLaptopsUpdated(!laptopsUpdated); // Toggle update state
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container my-5">
+      <h1 className="text-center mb-4">Laptop Management</h1>
+      <ImportCSV onImport={() => setLaptopsUpdated(!laptopsUpdated)} />
+      <LaptopForm onLaptopAdded={handleLaptopAdded} />
+      <LaptopList />
     </div>
   );
-}
+};
 
 export default App;
